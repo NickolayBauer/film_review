@@ -1,0 +1,54 @@
+body{
+	background: #46565C;
+}
+.check{
+	border: 1px dashed red;
+}
+.navbar a,p,h1,h2,h3,h4,h5,h6{
+	color:darkgrey;
+}
+.label_login,
+.label_login input,
+.label_login textarea,
+.label_login textarea:active,
+.label_login textarea:focus,
+.label_login input:active,
+.label_login input:focus{
+	color:white !important;
+	background:rgba(0,0,0,0);
+}
+.label_login{
+	font-size:120%;
+	color:white;
+	font-weight: 600;
+}
+.card{
+	background-color:#121212;
+	color:white;
+}
+.card:hover{
+	cursor:pointer;
+}
+.movie_card{
+	border: 3px solid black;
+	border-radius: 5px;
+}
+
+.navbar-toggler-icon{
+	color:white;
+}
+
+.write{
+	cursor: pointer;
+}
+.write:hover{
+	border-bottom: 1px solid white;
+}
+.comment{
+	display: none;
+}
+.block_of_comment{
+	border:1px solid darkgrey;
+	border-radius: 20px;
+
+}

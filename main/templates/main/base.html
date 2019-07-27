@@ -1,0 +1,66 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#044076">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="shortcut icon" href="{% static 'img/video-camera.ico' %}" type="image/x-icon" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>film-review.ru</title>
+    {{filter.form.media.css}}
+</head>
+
+<body>
+    <!--хедер-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <h5>FR.ru</h5>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between navbar" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{% url 'films' %}">
+                    <h5>Фильмы</h5>
+                </a>
+                <a class="nav-item nav-link" href="{% url 'random_film' %}">
+                    <h5>Генератор</h5>
+                </a>
+                {% if request.user.is_authenticated %}
+                    <a class="nav-item nav-link" href="/accounts/{{ request.user.id }}">
+                        <h5>Мой профиль</h5>
+                    </a>
+                {% endif %}                
+            </div>
+            <div>
+                {% if request.user.is_authenticated %}
+                <a class="nav-item nav-link m-0 p-0" href="{% url 'logout' %}">
+                    <h5>{{user.nick}}</h5>
+                </a>
+                {% else %}
+                <a class="nav-item nav-link m-0 p-0" href="{% url 'login' %}">
+                    <h5>Войти</h5>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <!---->
+    <div class="row no-gutters">
+        <div class="row no-gutters col-xl-11 col-lg-11 col-md-10 col-sm-10 col-10 mx-auto main_container my-5" >
+            {% block main_content %}
+            {% endblock %}
+        </div>
+    </div>
+{{filter.form.media.js}}
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<div class="col-10 mx-auto movie_card card" id="film_card_url" onclick="location.href = '{{film.get_absolute_url}}'">
+        <img id="film_card_img" src = "{{film.img}}" class="card-img-top mx-auto">
+        <div class="card-body">
+            <h5 class="card-title" id="film_card_title">{{film.title}}</h5>
+            <p class="card-text">
+                Жанр: 
+                <span id="film_card_genre">
+                    {% for genre in film.genres.all %}
+                        {{genre}}
+                        {% if forloop.counter != film.genres.all|length %}
+                            ,
+                        {% endif %}
+                {% endfor %}
+            </p>
+            <p class="card-text">
+                Сборы: 
+                <span id="film_card_box">
+                    {% if film.box_office %}
+                        {{ film.box_office }}
+                    {% endif %}
+                </span>
+            </p>
+            <p class="card-text">
+                Бюджет: 
+                <span id="film_card_budget">
+                    {% if film.budget %}
+                        {{film.budget}}
+                    {% endif %}
+            </p>
+            <p class="card-text" id="film_card_year">{{film.year}}</p>
+        </div>
+</div>

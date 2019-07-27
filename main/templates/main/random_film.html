@@ -1,0 +1,59 @@
+{% extends 'main/base.html' %}
+{% block main_content%}
+<div class="row no-gutters py-5">
+    <div class="col-12 row no-gutters">
+        <h2 class="col-6 mx-auto mb-4 text-center">Если вы не знаете, какой фильм посмотреть сегодня вечером - воспользуйтесь генератором</h2>
+    </div>
+    <div class="col-6 d-flex justify-content-center align-items-center">
+        <button type="button" class="btn btn-dark" id="find_film">Случайный фильм</button>
+    </div>
+    <div class="row no-gutters col-4 mx-auto">
+        <div id="app">
+            <a :href="[[get_absolute_url]]">
+                <div class="col-10 mx-auto movie_card card" id="film_card_url">
+                    <img id="film_card_img" :src=[[image]] class="card-img-top mx-auto">
+                    <div class="card-body">
+                        <h5 class="card-title" id="film_card_title">[[ title ]]</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <style type="text/css">
+    .card-img-top {
+        width: 60%;
+        padding-top: 10%;
+    }
+
+    .card p {
+        display: none;
+    }
+
+    #film_card_title {
+        text-align: center;
+    }
+    </style>
+</div>
+<script type="text/javascript">
+var app = new Vue({
+    el: '#app',
+    data: {
+        title: '{{film.title}}',
+        image: '{{film.img}}',
+        get_absolute_url: '{{film.get_absolute_url}}'
+    },
+    delimiters: ['[[', ']]']
+})
+</script>
+<script type="text/javascript">
+$("#find_film").click(function() {
+    $.get("{% url 'find_random_film' %}", function(data, status) {
+        console.log(data.film_url)
+        fields = $.parseJSON(data.film).fields
+        app.title = fields.title
+        app.image = fields.img
+        app.get_absolute_url = data.film_url
+    })
+});
+</script>
+{%endblock%}

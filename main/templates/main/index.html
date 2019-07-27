@@ -1,0 +1,66 @@
+{% extends 'main/base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% load staticfiles %}
+{% block main_content %}
+<div class="row no-gutters">
+    <div class="row no-gutters my-5 col-sm-3 d-none d-sm-flex justify-content-center align-items-center">
+        <div class="statistic">
+            <h5>Фильмов <span id="films">0</span></h5>
+            <h5>Рецензий <span id="rews">0</span></h5>
+            <h5>Пользователей <span id="users">0</span></h5>
+        </div>
+    </div>
+    <div class="col-sm-9 my-5 d-flex justify-content-strech">
+        <div class="main_logo_text d-flex justify-content-center align-items-center">
+            <h3 class="px-5">FR.ru - сервис для выражения Вашего мнения о новинках и классике</h3>
+        </div>
+    </div>
+    <div class="mt-5 col-12 row no-gutters">
+        {%for film in films|slice:"8"%}
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 row no-gutters mb-3 d-flex align-items-content">
+            {% include "main/film_card.html" with film=film%}
+        </div>
+        {%endfor%}
+    </div>
+</div>
+<script src="{% static 'js/timer.js'%}"></script>
+<script type="text/javascript">
+jQuery(function($) {
+    $('#films').countTo({
+        from: 0,
+        to: '{{films|length}}',
+        speed: 1500,
+        refreshInterval: 50,
+        onComplete: function(value) {
+            console.debug(this);
+        }
+    });
+});
+
+jQuery(function($) {
+    $('#rews').countTo({
+        from: 0,
+        to: '{{reviews}}',
+        speed: 1500,
+        refreshInterval: 50,
+        onComplete: function(value) {
+            console.debug(this);
+        }
+    });
+});
+
+jQuery(function($) {
+    $('#users').countTo({
+        from: 0,
+        to: '{{users}}',
+        speed: 1500,
+        refreshInterval: 50,
+        onComplete: function(value) {
+            console.debug(this);
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'main/base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% load staticfiles %}
+{% block main_content %}
+
+<form action="" method="GET" class="row no-gutters col-3">
+    <div class="container">
+       {% bootstrap_field filter.form.keywords bound_css_class="col-12 f_input" label_class="col-12 h_filter m-0 p-0 mb-1" %}
+       {% bootstrap_field filter.form.order bound_css_class="col-12 f_input" label_class="col-12 h_filter m-0 p-0 mb-1" %}
+       {% bootstrap_field filter.form.genres bound_css_class="col-12 f_input" label_class="col-12 h_filter m-0 p-0 mb-1" %}
+       {% bootstrap_field filter.form.year bound_css_class="col-12 f_input" label_class="col-12 h_filter m-0 p-0 mb-1" %}
+    <div class="col-12">
+    <button class="btn btn-dark mx-auto" type="submit">Поиск</button>
+    </div>
+    </div>
+
+</form>
+<div class="col-9 row no-gutters" >
+    <div class="mt-3 col-12 row no-gutters">
+        {% for film in paginated_films %}
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 row no-gutters mb-3 d-flex align-items-content">
+            {% include "main/film_card.html" with film=film%}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="col-12 my-3 d-flex justify-content-center">
+    <div>
+        {% include 'main/paginator.html' with paginated=paginated_films %}
+    </div>
+</div>
+</div>
+
+<style>
+.filter-label {
+    font-weight: bold;
+}
+
+input:not([type='checkbox']),
+select,
+.select2 {
+    width: 100% !important;
+}
+
+.h_filter {
+    font-size: 120%;
+    color: white;
+}
+
+.f_input input,
+.f_input select {
+    border-radius: 1vh;
+    font-size: 110%;
+    background: #E6E6E6 !important;
+}
+
+.f_input span,
+.select2-results__options {
+    background: #E6E6E6 !important;
+}
+
+span.select2-selection.select2-selection--multiple {
+    border: 1px solid #ced4da;
+}
+
+.select2 {
+    border-radius: 1vh !important;
+}
+</style>
+{% endblock %}

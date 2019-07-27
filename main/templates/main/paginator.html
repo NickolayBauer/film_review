@@ -1,0 +1,40 @@
+{% if paginated.has_other_pages %}
+  <ul class="pagination">
+    {% if paginated.has_previous %}
+      <li class="mx-1 d-flex justify-content-center align-items-center"><a href="?page={{ paginated.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="mx-1 disabled d-flex justify-content-center align-items-center"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginated.paginator.page_range %}
+      {% if paginated.number == i %}
+        <li class="mx-1 active d-flex justify-content-center align-items-center"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="mx-1 d-flex justify-content-center align-items-center"><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if paginated.has_next %}
+      <li class="mx-1 d-flex justify-content-center align-items-center"><a href="?page={{ paginated.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="mx-1 disabled d-flex justify-content-center align-items-center"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+
+<style>
+    .pagination li{
+        width: 50px;
+        height: 50px;
+        border:1px solid white;
+        border-radius:50%;
+        font-size: 120%;
+        background: rgba(0,0,0,0.5);
+        color:darkgrey;
+    }
+    .pagination li:hover{
+        background: rgba(0,0,0,0.8);
+    }
+    .pagination li a, li a:hover{
+        color:white;
+        text-decoration: none;
+    }
+</style>
+{% endif %}

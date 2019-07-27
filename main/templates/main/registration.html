@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% block main_content%}
+{% load bootstrap4%}
+    <div class="col-12 row no-gutters">
+        <h2 class="col-12 text-center profile_blue my-5">Регистрация</h2>
+        <form action="" method="post" class="form col-xl-6 col-lg-8 col-10 mx-auto">
+            {% csrf_token %}
+            {% bootstrap_form edit_form layout='horizontal' form_group_class='row no-gutters custom_hr py-4' label_class='col-4 profile_blue pl-4 label_font' field_class='col-7 mx-auto' %}
+            <div class="col-12 d-flex justify-content-center">
+                <button type="submit" class="btn btn_blue my-5 px-4 py-2">Зарегестрироваться</button>
+            </div>
+        </form>
+    </div>
+{%endblock%}
